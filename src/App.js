@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import "./App.css"
 
 function App() {
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState("");
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setFile(file);
+    setTitle(file.name);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="upload-container">
+        <h1>Upload json file</h1>
+        <input aria-label="inputJsonFile" type="file" accept=".json" onChange={handleFileChange} />
+        <div className="result">
+          {title && <h2>File Title: {title}</h2>}
+        </div>
+      </div>
   );
 }
 
