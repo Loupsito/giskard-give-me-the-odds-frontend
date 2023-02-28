@@ -45,3 +45,30 @@ input[type=file]:hover {
   height: 100vh;
   flex-direction: column;
 }
+
+button {
+  display: block;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffb900;
+  border-radius: 10px;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ffea6a;
+}
+
+
+.result{
+  font-weight: bold;
+  font-size: 44px;
+  letter-spacing: 2px;
+}
