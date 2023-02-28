@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import CountUp from "react-countup";
 
 function App() {
   const [file, setFile] = useState(null);
@@ -26,9 +27,13 @@ function App() {
         accept=".json"
         onChange={handleFileChange}
       />
-      {title && !odds &&<button onClick={handleButtonClick}>Give me the odds</button>}
+      {title && !odds && (
+        <button onClick={handleButtonClick}>Give me the odds</button>
+      )}
       <div className="result">
-        {odds && <p>{odds}%</p>}
+        {odds && (
+          <p>{<CountUp start={0} end={100} duration={3} suffix="%" />}</p>
+        )}
       </div>
     </div>
   );
