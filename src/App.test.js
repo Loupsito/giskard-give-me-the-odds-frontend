@@ -1,8 +1,18 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
+import {act} from "react-dom/test-utils";
 
 describe("App", () => {
+  const mockResponse = { value: '81.00' };
+  beforeEach(() => {
+    global.fetch = jest.fn().mockImplementation(() =>
+        Promise.resolve({
+          json: () => Promise.resolve(mockResponse),
+        })
+    );
+  });
+
   test("Renders Upload json file heading", () => {
     render(<App />);
     const heading = screen.getByText(/Upload json file/i);
@@ -35,7 +45,7 @@ describe("App", () => {
 
   test("Displays result when Give me the odds button is clicked", async () => {
     render(<App />);
-    const file = new File(["{}"], "test.json", {
+    const file = new File(['{"name": "toto"}'], "test.json", {
       type: "application/json",
     });
     const inputFile = screen.getByLabelText(/inputJsonFile/i);
@@ -43,6 +53,10 @@ describe("App", () => {
 
     const button = screen.getByText(/Give me the odds/i);
     fireEvent.click(button);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
 
     const result = await screen.findByText(/%/i);
     expect(result).toBeInTheDocument();
@@ -50,7 +64,7 @@ describe("App", () => {
 
   test("Resets state when reset button is clicked", async () => {
     render(<App />);
-    const file = new File(["{}"], "test.json", {
+    const file = new File(['{"name": "titi"}'], "test.json", {
       type: "application/json",
     });
     const inputFile = screen.getByLabelText(/inputJsonFile/i);
@@ -58,6 +72,10 @@ describe("App", () => {
 
     const button = screen.getByText(/Give me the odds/i);
     fireEvent.click(button);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
 
     const redoButton = screen.getByText(/Reset/i);
     fireEvent.click(redoButton);
