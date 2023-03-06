@@ -50,14 +50,23 @@ function App() {
   return (
     <div className="upload-container">
       <h1>Upload json file</h1>
-      <input
-        aria-label="inputJsonFile"
-        type="file"
-        accept=".json"
-        onChange={handleFileChange}
-      />
+      {!file && (
+        <input
+          aria-label="inputJsonFile"
+          type="file"
+          accept=".json"
+          onChange={handleFileChange}
+        />
+      )}
       {!displayResult && file && (
-        <button onClick={handleButtonClick}>Give me the odds</button>
+        <div>
+          <div className="file-loaded">
+            <p>File loaded ✅</p>{" "}
+          </div>
+          <div>
+            <button onClick={handleButtonClick}>Give me the odds</button>
+          </div>
+        </div>
       )}
       <div className="result">
         {displayResult && (

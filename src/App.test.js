@@ -39,7 +39,9 @@ describe("App", () => {
     const inputFile = screen.getByLabelText(/inputJsonFile/i);
     fireEvent.change(inputFile, { target: { files: [file] } });
 
+    const fileLoadedText = screen.getByText(/File loaded/i);
     const button = screen.getByText(/Give me the odds/i);
+    expect(fileLoadedText).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
 
